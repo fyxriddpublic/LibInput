@@ -1,0 +1,13 @@
+﻿#################################
+#####       输入管理        #####
+#################################
+cancel:                        #(什么情况下)取消输入
+  interact: true
+  animation: false
+allow:                         #允许的输入方式
+  chat: true
+  cmd: true
+
+#语言
+lang:
+  cn: "lang_cn.yml"

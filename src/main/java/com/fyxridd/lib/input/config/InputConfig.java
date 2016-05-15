@@ -1,6 +1,9 @@
 package com.fyxridd.lib.input.config;
 
 import com.fyxridd.lib.config.api.basic.Path;
+import com.fyxridd.lib.config.api.convert.ConfigConvert;
+import com.fyxridd.lib.lang.api.LangConverter;
+import com.fyxridd.lib.lang.api.LangGetter;
 
 public class InputConfig {
     @Path("cancel.interact")
@@ -14,6 +17,10 @@ public class InputConfig {
 
     @Path("allow.cmd")
     private boolean allowCmd;
+
+    @Path("lang")
+    @ConfigConvert(LangConverter.class)
+    private LangGetter lang;
 
     public boolean isCancelInteract() {
         return cancelInteract;
@@ -29,5 +36,9 @@ public class InputConfig {
 
     public boolean isAllowCmd() {
         return allowCmd;
+    }
+
+    public LangGetter getLang() {
+        return lang;
     }
 }

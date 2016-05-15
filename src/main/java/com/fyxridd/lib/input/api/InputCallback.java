@@ -1,6 +1,9 @@
 package com.fyxridd.lib.input.api;
 
-public interface InputHandler {
+/**
+ * 输入回调
+ */
+public interface InputCallback {
     /**
      * 玩家输入时调用
      * @param s 输入的内容
