@@ -119,9 +119,7 @@ public class InputManager {
         //速度检测
         if (!ignoreSpeed && !SpeedApi.checkShort(p, InputPlugin.instance.pn, SHORT_SPEED_INPUT, 2)) return false;
         //取消先前的
-        if (inputtingPlayers.remove(p) != null) {
-            if (tip) MessageApi.send(p, get(p.getName(), 10), true);
-        }
+        if (inputtingPlayers.remove(p) != null && tip) MessageApi.send(p, get(p.getName(), 10), false);
 
         //注册新的
         inputtingPlayers.put(p, inputCallback);
@@ -132,9 +130,7 @@ public class InputManager {
      * @see com.fyxridd.lib.input.api.InputApi#delInput(Player, boolean)
      */
     public void del(Player p, boolean tip) {
-        if (inputtingPlayers.remove(p) != null) {
-            if (tip) MessageApi.send(p, get(p.getName(), 10), true);
-        }
+        if (inputtingPlayers.remove(p) != null && tip) MessageApi.send(p, get(p.getName(), 10), false);
     }
 
     private FancyMessage get(String player, int id, Object... args) {
