@@ -1,0 +1,8 @@
+﻿name: LibInput
+main: com.fyxridd.lib.input.InputPlugin
+version: 0.1.0
+depend: [LibCore, LibConfig, LibLang]
+commands:
+  s:
+    description: InputManager
+    usage: /<command> ?
