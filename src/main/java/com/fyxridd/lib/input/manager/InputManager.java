@@ -1,11 +1,11 @@
 package com.fyxridd.lib.input.manager;
 
-import com.fyxridd.lib.config.api.ConfigApi;
-import com.fyxridd.lib.config.manager.ConfigManager;
 import com.fyxridd.lib.core.api.MessageApi;
 import com.fyxridd.lib.core.api.UtilApi;
+import com.fyxridd.lib.core.api.config.ConfigApi;
 import com.fyxridd.lib.core.api.event.PlayerChatEvent;
 import com.fyxridd.lib.core.api.fancymessage.FancyMessage;
+import com.fyxridd.lib.core.config.ConfigManager;
 import com.fyxridd.lib.input.InputPlugin;
 import com.fyxridd.lib.input.api.InputApi;
 import com.fyxridd.lib.input.api.InputCallback;
