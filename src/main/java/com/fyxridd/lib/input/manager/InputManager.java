@@ -1,20 +1,19 @@
 package com.fyxridd.lib.input.manager;
 
 import com.fyxridd.lib.core.api.MessageApi;
-import com.fyxridd.lib.core.api.UtilApi;
 import com.fyxridd.lib.core.api.config.ConfigApi;
 import com.fyxridd.lib.core.api.event.PlayerChatEvent;
 import com.fyxridd.lib.core.api.fancymessage.FancyMessage;
 import com.fyxridd.lib.core.config.ConfigManager;
+import com.fyxridd.lib.func.api.FuncApi;
 import com.fyxridd.lib.input.InputPlugin;
 import com.fyxridd.lib.input.api.InputApi;
 import com.fyxridd.lib.input.api.InputCallback;
+import com.fyxridd.lib.input.cmd.InputCmd;
 import com.fyxridd.lib.input.config.InputConfig;
 import com.fyxridd.lib.speed.api.SpeedApi;
+
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.PlayerAnimationEvent;
@@ -43,22 +42,8 @@ public class InputManager {
                 config = value;
             }
         });
-        //注册命令's'
-        Bukkit.getPluginCommand("s").setExecutor(new CommandExecutor() {
-            @Override
-            public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-                if (config.isAllowCmd() && sender instanceof Player && args.length > 0) {
-                    Player p = (Player) sender;
-                    //玩家在输入事件中
-                    InputCallback inputCallback = inputtingPlayers.get(p);
-                    if (inputCallback != null) {
-                        String content = UtilApi.combine(args, " ", 0, args.length-1);
-                        if (inputCallback.onInput(content)) inputtingPlayers.remove(p);
-                    }
-                }
-                return true;
-            }
-        });
+        //注册功能
+        FuncApi.register(InputPlugin.instance.pn, new InputCmd());
         //注册事件
         {
             //玩家加入
@@ -99,14 +84,7 @@ public class InputManager {
                 public void execute(Listener listener, Event e) throws EventException {
                     PlayerChatEvent event = (PlayerChatEvent) e;
 
-                    if (config.isAllowChat()) {
-                        //玩家在输入事件中
-                        InputCallback inputCallback = inputtingPlayers.get(event.getP());
-                        if (inputCallback != null) {
-                            event.setCancelled(true);//取消事件
-                            if (inputCallback.onInput(event.getMsg())) inputtingPlayers.remove(event.getP());
-                        }
-                    }
+                    if (config.isAllowChat() && checkOnInput(event.getP(), event.getMsg())) event.setCancelled(true);
                 }
             }, InputPlugin.instance, true);
         }
@@ -124,6 +102,21 @@ public class InputManager {
         //注册新的
         inputtingPlayers.put(p, inputCallback);
         return true;
+    }
+
+    /**
+     * 检测输入
+     * @param p 玩家
+     * @param content 内容
+     * @return 玩家是否在输入事件中
+     */
+    public boolean checkOnInput(Player p, String content) {
+        InputCallback inputCallback = inputtingPlayers.get(p);
+        if (inputCallback != null) {
+            if (inputCallback.onInput(content)) inputtingPlayers.remove(p);
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -1,7 +1,7 @@
 ﻿name: LibInput
 main: com.fyxridd.lib.input.InputPlugin
 version: 0.1.0
-depend: [LibCore, LibSpeed]
+depend: [LibCore, LibFunc, LibSpeed]
 commands:
   s:
     description: LibInput
