@@ -9,7 +9,7 @@ import com.fyxridd.lib.func.api.FuncApi;
 import com.fyxridd.lib.input.InputPlugin;
 import com.fyxridd.lib.input.api.InputApi;
 import com.fyxridd.lib.input.api.InputCallback;
-import com.fyxridd.lib.input.cmd.InputCmd;
+import com.fyxridd.lib.input.func.InputCmd;
 import com.fyxridd.lib.input.config.InputConfig;
 import com.fyxridd.lib.speed.api.SpeedApi;
 
