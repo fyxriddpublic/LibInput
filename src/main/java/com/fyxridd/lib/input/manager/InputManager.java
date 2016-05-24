@@ -2,9 +2,9 @@ package com.fyxridd.lib.input.manager;
 
 import com.fyxridd.lib.core.api.MessageApi;
 import com.fyxridd.lib.core.api.config.ConfigApi;
+import com.fyxridd.lib.core.api.config.Setter;
 import com.fyxridd.lib.core.api.event.PlayerChatEvent;
 import com.fyxridd.lib.core.api.fancymessage.FancyMessage;
-import com.fyxridd.lib.core.config.ConfigManager;
 import com.fyxridd.lib.func.api.FuncApi;
 import com.fyxridd.lib.input.InputPlugin;
 import com.fyxridd.lib.input.api.InputApi;
@@ -37,7 +37,7 @@ public class InputManager {
 
 	public InputManager() {
         //监听配置
-        ConfigApi.addListener(InputPlugin.instance.pn, InputConfig.class, new ConfigManager.Setter<InputConfig>() {
+        ConfigApi.addListener(InputPlugin.instance.pn, InputConfig.class, new Setter<InputConfig>() {
             @Override
             public void set(InputConfig value) {
                 config = value;
