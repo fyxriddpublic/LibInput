@@ -7,12 +7,19 @@ import com.fyxridd.lib.input.manager.InputManager;
 
 public class InputPlugin extends SimplePlugin{
     public static InputPlugin instance;
+    public static boolean libChatShowHook;
 
     private InputManager inputManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        try {
+            Class.forName("com.fyxridd.lib.show.chat.ShowPlugin");
+            libChatShowHook = true;
+        }catch (Exception e) {
+            libChatShowHook = false;
+        }
 
         //注册配置
         ConfigApi.register(pn, InputConfig.class);

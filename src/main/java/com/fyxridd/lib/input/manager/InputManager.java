@@ -11,6 +11,7 @@ import com.fyxridd.lib.input.api.InputApi;
 import com.fyxridd.lib.input.api.InputCallback;
 import com.fyxridd.lib.input.func.InputCmd;
 import com.fyxridd.lib.input.config.InputConfig;
+import com.fyxridd.lib.show.chat.api.event.PlayerPageExitEvent;
 import com.fyxridd.lib.speed.api.SpeedApi;
 
 import org.bukkit.Bukkit;
@@ -46,6 +47,17 @@ public class InputManager {
         FuncApi.register(InputPlugin.instance.pn, new InputCmd());
         //注册事件
         {
+            //玩家退出页面
+            if (InputPlugin.libChatShowHook) {
+                Bukkit.getPluginManager().registerEvent(PlayerPageExitEvent.class, InputPlugin.instance, EventPriority.LOWEST, new EventExecutor() {
+                    @Override
+                    public void execute(Listener listener, Event e) throws EventException {
+                        PlayerPageExitEvent event = (PlayerPageExitEvent) e;
+                        InputApi.delInput(event.getP(), false);
+                    }
+                }, InputPlugin.instance);
+            }
+            
             //玩家加入
             Bukkit.getPluginManager().registerEvent(PlayerJoinEvent.class, InputPlugin.instance, EventPriority.LOWEST, new EventExecutor() {
                 @Override

@@ -2,3 +2,4 @@
 main: com.fyxridd.lib.input.InputPlugin
 version: 0.1.0
 depend: [LibCore, LibFunc, LibSpeed]
+softdepend: [LibChatShow]
