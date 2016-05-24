@@ -23,5 +23,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: mysql:mysql-connector-java:5.1.38" level="project" />
     <orderEntry type="module" module-name="LibFunc" scope="PROVIDED" />
     <orderEntry type="module" module-name="LibSpeed" scope="PROVIDED" />
+    <orderEntry type="module" module-name="LibChatShow" scope="PROVIDED" />
   </component>
 </module>
