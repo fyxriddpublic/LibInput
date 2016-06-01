@@ -52,8 +52,10 @@ public class InputManager {
                 Bukkit.getPluginManager().registerEvent(PlayerPageExitEvent.class, InputPlugin.instance, EventPriority.LOWEST, new EventExecutor() {
                     @Override
                     public void execute(Listener listener, Event e) throws EventException {
-                        PlayerPageExitEvent event = (PlayerPageExitEvent) e;
-                        InputApi.delInput(event.getP(), false);
+                        if (e instanceof PlayerPageExitEvent) {
+                            PlayerPageExitEvent event = (PlayerPageExitEvent) e;
+                            InputApi.delInput(event.getP(), false);
+                        }
                     }
                 }, InputPlugin.instance);
             }
@@ -62,16 +64,20 @@ public class InputManager {
             Bukkit.getPluginManager().registerEvent(PlayerJoinEvent.class, InputPlugin.instance, EventPriority.LOWEST, new EventExecutor() {
                 @Override
                 public void execute(Listener listener, Event e) throws EventException {
-                    PlayerJoinEvent event = (PlayerJoinEvent) e;
-                    inputtingPlayers.remove(event.getPlayer());
+                    if (e instanceof PlayerJoinEvent) {
+                        PlayerJoinEvent event = (PlayerJoinEvent) e;
+                        inputtingPlayers.remove(event.getPlayer());
+                    }
                 }
             }, InputPlugin.instance);
             //玩家退出
             Bukkit.getPluginManager().registerEvent(PlayerQuitEvent.class, InputPlugin.instance, EventPriority.LOWEST, new EventExecutor() {
                 @Override
                 public void execute(Listener listener, Event e) throws EventException {
-                    PlayerQuitEvent event = (PlayerQuitEvent) e;
-                    inputtingPlayers.remove(event.getPlayer());
+                    if (e instanceof PlayerQuitEvent) {
+                        PlayerQuitEvent event = (PlayerQuitEvent) e;
+                        inputtingPlayers.remove(event.getPlayer());
+                    }
                 }
             }, InputPlugin.instance);
             //玩家交互
